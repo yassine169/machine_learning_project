@@ -1,21 +1,9 @@
 # Analyse Critique - Tâche 3
 
-Suite aux évaluations MLflow sur divers modèles de machine learning pour notre système bancaire, voici nos conclusions critiques :
+Après avoir réalisé plusieurs évaluations avec MLflow sur différents modèles de machine learning pour notre système bancaire, on constate que la régression logistique avec réduction de dimension (PCA) donne les meilleurs résultats. Elle atteint une accuracy de 80% et un F1-score d’environ 79%. Le modèle SVM est aussi très performant avec 79% d’accuracy, mais la régression logistique reste plus avantageuse car elle est plus rapide et surtout plus facile à interpréter. Cet aspect est très important dans un contexte bancaire, notamment pour justifier des décisions comme un refus de crédit.
 
-### Quel algorithme donne les meilleurs résultats ?
-L'algorithme ayant obtenu les meilleurs résultats est la **Régression Logistique** (avec réduction de dimension), avec une **Accuracy de 80%** et un **F1-score d'environ 79%**. 
-Le modèle **SVM (79% d'accuracy)** offre également d'excellentes performances. 
-L'avantage de la Régression Logistique est sa grande rapidité et sa forte explicabilité (très important en contexte bancaire pour justifier un refus de crédit), face à SVM ou Random Forest.
+Concernant les performances, les paramètres des modèles (comme C=1.0 ou n_estimators=100) ont un impact, mais ce n’est pas le facteur principal. Le point le plus important est la préparation des données, en particulier le pipeline utilisé. Dans notre cas, l’application du StandardScaler a été essentielle pour améliorer les résultats, surtout pour des modèles comme le SVM et le KNN. Sans cette étape de normalisation, certaines variables comme Credit_amount auraient pris trop d’importance et déséquilibré le modèle.
 
-### Quels paramètres influencent le plus les performances ?
-Bien que nos paramètres (ex: `C=1.0`, `n_estimators=100`) aient été les références par défaut de bon sens, le plus puissant levier s'est avéré être **la configuration des features en amont** (le Pipeline). 
-Dans le contexte présent, l'application du StandardScaler a été absolument vitale pour atteindre de bonnes performances sur le SVM et le KNN (les variables comme le 'Credit_amount' l'auraient sinon totalement déséquilibré).
+Par ailleurs, la réduction de dimension avec PCA améliore clairement les performances. En comparant les résultats obtenus avec MLflow, on observe que l’accuracy de la régression logistique passe de 78% à 80%, tandis que celle du Random Forest passe de 74% à 77%.
 
-### La réduction de dimension améliore-t-elle les résultats ?
-**Oui, de manière forte et confirmée !** 
-Si l'on compare les runs MLflow, on s'aperçoit que :
-* L'Accuracy de la **Régression Logistique** passe de **78% à 80%** lorsque les données utilisées proviennent de la décomposition PCA.
-* L'Accuracy du **Random Forest** passe de **74% à 77%**.
-
-**Explication :**
-Le dataset bancaire initial comporte un grand nombre de variables binaires générées suite au One-Hot Encoding des variables catégorielles. L'ACP (PCA) élimine le bruit statistique, la forte multicolinéarité induite, et synthétise le signal principal (95% de la variance expliquée). Le modèle apprend alors sur une base plus propre et est moins sujet à l'overfitting.
+Cela s’explique par la nature du dataset, qui contient un grand nombre de variables, notamment après le One-Hot Encoding des variables catégorielles. La PCA permet de réduire le bruit, de limiter la multicolinéarité et de conserver l’essentiel de l’information (environ 95% de la variance expliquée). Ainsi, les modèles apprennent sur des données plus propres, ce qui améliore leurs performances et réduit le risque d’overfitting.

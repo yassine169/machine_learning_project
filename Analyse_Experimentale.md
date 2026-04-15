@@ -1,29 +1,11 @@
-# Analyse Expérimentale - Tâche 3
+Analyse Expérimentale - Tâche 3
 
-Ce rapport documente les expérimentations réalisées lors de la modélisation pour la prédiction du risque de crédit bancaire. Toutes les expériences ont été tracées en utilisant **MLflow**.
+Ce rapport présente les différentes expérimentations réalisées pour construire un modèle de prédiction du risque de crédit bancaire. Toutes les expériences ont été suivies et enregistrées à l’aide de MLflow.
 
-## Algorithmes Testés
-Les modèles suivants ont été retenus pour notre problématique de classification :
-1. **Régression Logistique** : Modèle linéaire simple, base de comparaison solide.
-2. **Support Vector Machine (SVM)** : Excellent pour séparer des classes via une frontière de décision non-linéaire (Kernel RBF).
-3. **Random Forest** : Modèle ensembliste, souvent robuste au sur-apprentissage.
-4. **k-Nearest Neighbors (KNN)** : Apprentissage basé sur la proximité.
+Plusieurs algorithmes de classification ont été testés. La régression logistique a été utilisée comme modèle de base simple et efficace. Le SVM a été choisi pour sa capacité à séparer les classes avec des frontières non linéaires grâce au kernel RBF. Le Random Forest a été utilisé pour sa robustesse face au sur-apprentissage, tandis que le KNN repose sur la proximité entre les données pour faire ses prédictions.
 
-## Pré-traitement et Paramètres
-Le dataset comporte des variables continues et catégorielles.
-* **Encodage** : One-Hot Encoding via `ColumnTransformer`.
-* **Standardisation** : StandardScaler (nécessaire pour KNN, SVM, et PCA).
-* **Réduction de Dimensionnalité** : Application de l'ACP (PCA) avec 95% de variance expliquée sur certains runs. `t-SNE` a également été implémenté pour l'exploration de données.
+Le dataset contient à la fois des variables continues et catégorielles, ce qui nécessite un pré-traitement adapté. Les variables catégorielles ont été transformées avec le One-Hot Encoding via un ColumnTransformer. Ensuite, une standardisation avec StandardScaler a été appliquée, ce qui est particulièrement important pour des modèles comme le KNN, le SVM et aussi pour la PCA. Une réduction de dimension avec la PCA (en gardant 95% de la variance expliquée) a été utilisée sur certains tests. En plus, la méthode t-SNE a été utilisée pour explorer et visualiser les données.
 
-**Hyperparamètres utilisés :**
-* *Logistic Regression* : `C`: 1.0, `solver`: 'lbfgs'
-* *SVM* : `C`: 1.0, `kernel`: 'rbf'
-* *Random Forest* : `n_estimators`: 100, `max_depth`: None
-* *KNN* : `n_neighbors`: 5, `weights`: 'uniform'
+Concernant les hyperparamètres, des valeurs standards ont été utilisées pour chaque modèle : la régression logistique avec C=1.0 et solver='lbfgs', le SVM avec C=1.0 et un kernel RBF, le Random Forest avec n_estimators=100 et sans limite de profondeur, et enfin le KNN avec n_neighbors=5 et des poids uniformes.
 
-## Résultats Obtenus
-Les résultats détaillés se trouvent dans `Tableau_Comparatif.md` généré automatiquement depuis les logs MLflow.
-Globalement :
-* Les performances gravitent entre 72.5% et 80% d'Accuracy globale.
-* Les modèles linéaires ou basés sur SVM tirent le meilleur parti de ces variables.
-* La réduction de dimension PCA a montré un impact empirique notable sur les performances (voir Analyse Critique).
+Les résultats détaillés sont disponibles dans le fichier Tableau_Comparatif.md, généré automatiquement à partir des logs MLflow. De manière générale, les performances des modèles se situent entre 72.5% et 80% d’accuracy. On observe que les modèles linéaires et le SVM obtiennent les meilleurs résultats sur ce dataset. Enfin, la réduction de dimension avec la PCA a montré une amélioration notable des performances, comme expliqué dans l’analyse critique.
