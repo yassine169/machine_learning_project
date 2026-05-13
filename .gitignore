@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db
+
+# ML
+mlruns/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Frontend Build
+build/
+dist/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

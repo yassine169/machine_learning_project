@@ -1,0 +1,11 @@
+Analyse Expérimentale - Tâche 3
+
+Ce rapport présente les différentes expérimentations réalisées pour construire un modèle de prédiction du risque de crédit bancaire. Toutes les expériences ont été suivies et enregistrées à l’aide de MLflow.
+
+Plusieurs algorithmes de classification ont été testés. La régression logistique a été utilisée comme modèle de base simple et efficace. Le SVM a été choisi pour sa capacité à séparer les classes avec des frontières non linéaires grâce au kernel RBF. Le Random Forest a été utilisé pour sa robustesse face au sur-apprentissage, tandis que le KNN repose sur la proximité entre les données pour faire ses prédictions.
+
+Le dataset contient à la fois des variables continues et catégorielles, ce qui nécessite un pré-traitement adapté. Les variables catégorielles ont été transformées avec le One-Hot Encoding via un ColumnTransformer. Ensuite, une standardisation avec StandardScaler a été appliquée, ce qui est particulièrement important pour des modèles comme le KNN, le SVM et aussi pour la PCA. Une réduction de dimension avec la PCA (en gardant 95% de la variance expliquée) a été utilisée sur certains tests. En plus, la méthode t-SNE a été utilisée pour explorer et visualiser les données.
+
+Concernant les hyperparamètres, des valeurs standards ont été utilisées pour chaque modèle : la régression logistique avec C=1.0 et solver='lbfgs', le SVM avec C=1.0 et un kernel RBF, le Random Forest avec n_estimators=100 et sans limite de profondeur, et enfin le KNN avec n_neighbors=5 et des poids uniformes.
+
+Les résultats détaillés sont disponibles dans le fichier Tableau_Comparatif.md, généré automatiquement à partir des logs MLflow. De manière générale, les performances des modèles se situent entre 72.5% et 80% d’accuracy. On observe que les modèles linéaires et le SVM obtiennent les meilleurs résultats sur ce dataset. Enfin, la réduction de dimension avec la PCA a montré une amélioration notable des performances, comme expliqué dans l’analyse critique.

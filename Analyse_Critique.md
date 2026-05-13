@@ -1,0 +1,9 @@
+# Analyse Critique - Tâche 3
+
+Après avoir réalisé plusieurs évaluations avec MLflow sur différents modèles de machine learning pour notre système bancaire, on constate que la régression logistique avec réduction de dimension (PCA) donne les meilleurs résultats. Elle atteint une accuracy de 80% et un F1-score d’environ 79%. Le modèle SVM est aussi très performant avec 79% d’accuracy, mais la régression logistique reste plus avantageuse car elle est plus rapide et surtout plus facile à interpréter. Cet aspect est très important dans un contexte bancaire, notamment pour justifier des décisions comme un refus de crédit.
+
+Concernant les performances, les paramètres des modèles (comme C=1.0 ou n_estimators=100) ont un impact, mais ce n’est pas le facteur principal. Le point le plus important est la préparation des données, en particulier le pipeline utilisé. Dans notre cas, l’application du StandardScaler a été essentielle pour améliorer les résultats, surtout pour des modèles comme le SVM et le KNN. Sans cette étape de normalisation, certaines variables comme Credit_amount auraient pris trop d’importance et déséquilibré le modèle.
+
+Par ailleurs, la réduction de dimension avec PCA améliore clairement les performances. En comparant les résultats obtenus avec MLflow, on observe que l’accuracy de la régression logistique passe de 78% à 80%, tandis que celle du Random Forest passe de 74% à 77%.
+
+Cela s’explique par la nature du dataset, qui contient un grand nombre de variables, notamment après le One-Hot Encoding des variables catégorielles. La PCA permet de réduire le bruit, de limiter la multicolinéarité et de conserver l’essentiel de l’information (environ 95% de la variance expliquée). Ainsi, les modèles apprennent sur des données plus propres, ce qui améliore leurs performances et réduit le risque d’overfitting.
